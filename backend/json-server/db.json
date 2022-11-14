@@ -1,0 +1,51 @@
+{
+  "userData": [
+    {
+      "name": "",
+      "layers": [],
+      "id": 1
+    },
+    {
+      "name": "",
+      "layers": [],
+      "id": 2
+    },
+    {
+      "name": "",
+      "layers": [],
+      "id": 3
+    }
+  ],
+  "routes": {
+    "routes": [
+      "https://kml-bucket-yutaron.s3.ap-northeast-1.amazonaws.com/history-2021-09-12.kml",
+      "https://kml-bucket-yutaron.s3.ap-northeast-1.amazonaws.com/history-2021-09-13.kml",
+      "https://kml-bucket-yutaron.s3.ap-northeast-1.amazonaws.com/history-2021-09-14.kml",
+      "https://kml-bucket-yutaron.s3.ap-northeast-1.amazonaws.com/history-2021-09-15.kml",
+      "https://kml-bucket-yutaron.s3.ap-northeast-1.amazonaws.com/history-2021-09-16.kml",
+      "https://kml-bucket-yutaron.s3.ap-northeast-1.amazonaws.com/history-2021-09-17.kml",
+      "https://kml-bucket-yutaron.s3.ap-northeast-1.amazonaws.com/history-2021-09-18.kml",
+      "https://kml-bucket-yutaron.s3.ap-northeast-1.amazonaws.com/history-2021-09-19.kml"
+    ],
+    "locations": [
+      {
+        "title": "富良野に行ったよー",
+        "description": "楽しかったー。",
+        "latlng": {
+          "lat": 42.70542983614407,
+          "lng": 141.2895291165737
+        },
+        "movie_url": "https://www.youtube.com/embed/KyMSpvOYbX4"
+      },
+      {
+        "title": "十勝に行ったよー",
+        "description": "温泉楽しかったー。",
+        "latlng": {
+          "lat": 42.99185316048282,
+          "lng": 142.97525384374998
+        },
+        "movie_url": "https://www.youtube.com/embed/KyMSpvOYbX4"
+      }
+    ]
+  }
+}

@@ -1,0 +1,67 @@
+// storybookで読み込まれないので、不本意だけど_app.tsx側に書く。
+// @import 'tailwindcss/base';
+// @import 'tailwindcss/components';
+// @import 'tailwindcss/utilities';
+
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: Helvetica, Verdana, 'ヒラギノ角ゴ ProN W3',
+    'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, MyYuGothicM, YuGothic,
+    sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+  font-size: 1.3rem;
+  word-spacing: 1px;
+  color: #777;
+}
+
+a {
+  color: tomato;
+}
+
+.infobox {
+  font-family: 'Arial', sans-serif;
+  display: block;
+  // height: 800px;
+  // width: 400px;
+  position: relative;
+  background: white;
+  opacity: 0.9;
+}
+
+.infobox h1 {
+  text-align: left;
+  font-size: 1.5em;
+  padding-bottom: 10px;
+}
+
+.infobox .description {
+  font-size: 1.1em;
+  text-align: left;
+}
+
+.infobox iframe {
+  padding: 10px 0;
+}
+
+// 地点登録のモーダルウィンドウここから
+.ReactModal__content {
+}
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
+// 地点登録のモーダルウィンドウここまで

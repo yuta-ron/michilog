@@ -1,0 +1,5 @@
+{
+  "/api/v1/route": "/userdata",
+  "/api/v1/routes": "/routes"
+ ,"/api/test/mock/v1/get_company": "/get_company"
+}

@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+.disable {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.drag-area{  
+  background-color: #ccc;
+  border: 2px dashed #fff;
+  min-height: 200px;
+  width: 100%;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  
+  .icon{
+    font-size: 100px;
+    color: #fff;
+  }
+
+  header{
+    font-size: 30px;
+    font-weight: 500;
+    color: #fff;
+  }
+
+  .ortext{
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    margin: 10px 0 15px 0;
+  }
+
+  .explore-button {
+    cursor: pointer;
+    padding: 10px 0px;
+    width: 40%;
+    height: 50px;
+    position: relative;
+    font-size: 18px;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    color: #777;
+    border-radius: 5px;
+    
+    input[type="file"] {
+      cursor: pointer;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+    }
+
+    &:hover {
+      width: 41%;
+      height: 51.3px;  
+      font-size: 19px;
+    }
+  }
+
+  img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+}
+
