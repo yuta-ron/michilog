@@ -15,6 +15,7 @@ export default () => {
   const [mapName, setMapName] = useState<string>('');
   const [mapDescription, setDescription] = useState<string>('');
   const [mapId, setMapId] = useState<number | null>(null);
+  const [isUpdating, setIsUpdating] = useState<boolean>(false);
 
   useEffect(() => {
     if (router.asPath !== router.route) {
@@ -55,6 +56,12 @@ export default () => {
   if (!recoilMapState) {
     return <div>loading</div>;
   }
+
+  const updateRequest = async () => {
+    setIsUpdating(true);
+    await updateMap(recoilMapState);
+    setIsUpdating(false);
+  };
 
   return (
     <>
@@ -113,9 +120,11 @@ export default () => {
             <div className='text-right pb-2'>
               <Button
                 text='保存'
-                onclick={async () => {
+                disabled={isUpdating}
+                isLoading={isUpdating}
+                onClick={async () => {
                   if (recoilMapState) {
-                    await updateMap(recoilMapState);
+                    await updateRequest();
                   }
                 }}
               />

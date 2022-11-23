@@ -28,7 +28,7 @@ class AuthController extends Controller
             'name' => $user->getNickname(),
             'provider' => self::TWITTER,
             'provider_id' => $user->getId(),
-            'icon_url' => $user->getAvatar(),
+            'icon_url' => str_replace('_normal', '', $user->getAvatar()),
         ]);
 
         Auth::login($user, true);

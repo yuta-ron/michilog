@@ -45,11 +45,35 @@
 // );
 
 import React from 'react';
+import { useRecoilValue } from 'recoil';
+import { userInfoState } from 'types/state';
 import { Header } from '../../components/organisms/Header';
 
-export default () => (
-  <>
-    <Header />
-    <div style={{ height: '1000px' }}>マイページは今準備中！</div>
-  </>
-);
+export default () => {
+  const userInfo = useRecoilValue(userInfoState);
+
+  const userCard = (
+    <>
+      <div className='flex justify-center'>
+        <img
+          className='rounded-full'
+          style={{ width: '150px', height: '150px' }}
+          src={userInfo?.icon_url}
+        ></img>
+      </div>
+      <div className='flex justify-center'>
+        <span>{userInfo?.name}</span>
+      </div>
+      <div className='flex justify-center'>
+        <span>投稿したマップの数: {userInfo?.meta.map_count}</span>
+      </div>
+    </>
+  );
+
+  return (
+    <>
+      <Header />
+      <div className='h-96'>{userInfo && userCard}</div>
+    </>
+  );
+};

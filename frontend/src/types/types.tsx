@@ -48,6 +48,9 @@ export type MappyMapType = MappyMap;
 export type UserInfo = {
   name: string;
   icon_url: string;
+  meta: {
+    map_count: number;
+  };
 };
 
 export type PlaceInfo = {

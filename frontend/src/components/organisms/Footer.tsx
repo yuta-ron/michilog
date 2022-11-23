@@ -9,9 +9,9 @@ export class Footer extends React.Component<State> {
 
   render () {
     return (
-      <footer className='w-full bg-gray-200'>
-        <p className='p-2 text-center text-xs'>
-          Copyright © {new Date().getFullYear()} Michilog, All Rights Reserved.
+      <footer className='bottom-0'>
+        <p className=' text-center text-xs'>
+          Copyright © {new Date().getFullYear()} michilog, All Rights Reserved.
         </p>
       </footer>
     );

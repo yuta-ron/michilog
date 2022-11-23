@@ -10,7 +10,7 @@ export default {
 export const Default = () => {
   return (
     <RecoilRoot>
-      <Button text='テストボタン' onclick={() => {}} />
+      <Button text='テストボタン' onClick={() => {}} />
     </RecoilRoot>
   );
 };

@@ -21,11 +21,13 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::prefix('api/v1')->middleware('auth')->group(function() {
-// Route::prefix('api/v1')->group(function() {
     Route::get('/user', function (Request $request) {
         $user = [
             'name' => $request->user()->name,
             'icon_url' => $request->user()->icon_url,
+            'meta' => [
+                'map_count'=> $request->user()->maps()->count(),
+            ]
         ];
         return response()->json($user);
     });
@@ -34,8 +36,6 @@ Route::prefix('api/v1')->middleware('auth')->group(function() {
     Route::get('maps/{id}',MapController::class. '@index');
     Route::put('maps/{id}',MapController::class. '@update');
     Route::delete('maps', MapController::class. '@destroy');
-
     Route::post('locations', LocationController::class. '@create');
 
-    // アプリケーションの認証&作成者かどうかの認証
 });

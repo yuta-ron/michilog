@@ -49,7 +49,7 @@ export const Header = () => {
         ) : (
           <div className='rounded text-sm  px-5 py-3 border-2 border-style-500'>
             {/* ログインしていなかったら */}
-            <Button className='' onclick={TwitterLogin} text='ログイン' />
+            <Button className='' onClick={TwitterLogin} text='ログイン' />
           </div>
         )}
       </div>
@@ -68,31 +68,23 @@ export const Header = () => {
                 height='32px'
                 src={userInfo.icon_url || ''}
               />
-
-              {/* <Button
-                onclick={() => {
-                  TwitterLogout();
-                }}
-                className='px-3 inline-block'
-                text='ログアウト'
-              /> */}
               <span className='inline-block px-3 '>
-                {/* <Button
-                  onclick={() => {
-                    window.location.href = '/mypage';
-                  }}
-                  className='px-3 inline-block'
-                  text='マイページへ'
-                /> */}
                 <Button
-                  onclick={() => {
+                  onClick={() => {
                     window.location.href = '/maps/add';
                   }}
                   className='px-3 inline-block bg-red-600 text-white p-1 rounded font-semibold'
                   text='追加する'
                 />
                 <Button
-                  onclick={TwitterLogout}
+                  onClick={() => {
+                    window.location.href = '/mypage';
+                  }}
+                  className='px-3 inline-block'
+                  text='マイページへ'
+                />
+                <Button
+                  onClick={TwitterLogout}
                   className='px-3 inline-block'
                   text='ログアウト'
                 />
@@ -101,7 +93,7 @@ export const Header = () => {
           ) : (
             <div className='rounded px-5 py-3 md:border-2 border-style-500'>
               {/* ログインしていなかったら */}
-              <Button className='' onclick={TwitterLogin} text='ログイン' />
+              <Button className='' onClick={TwitterLogin} text='ログイン' />
             </div>
           )}
         </div>

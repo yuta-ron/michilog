@@ -17,5 +17,6 @@ export * from './organisms/MappyMap';
 export * from './organisms/LayerEditor';
 export * from './organisms/LayerList';
 export * from './organisms/Feed';
+export * from './organisms/OldExample';
 export * from './molecules/MarkerLocation';
 export * from './molecules/DropArea';
