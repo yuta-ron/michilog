@@ -1,56 +1,38 @@
 /* eslint "react/display-name": "off" */
-
-// Recoilのサンプルコード
-// https://www.kwbtblog.com/entry/2020/11/07/032250
-// import React from "react";
-// import {
-//   RecoilRoot,
-//   atom,
-//   useRecoilState,
-//   useRecoilValue
-// } from 'recoil';
-
-// const countAtom = atom<number>({
-//   key: 'countAtom',
-//   default: 0
-// });
-
-// function UpDown () {
-//   const [count, setCount] = useRecoilState(countAtom);
-//   return (
-//       <div className="flex h-48">
-//           <button onClick={() => setCount(count - 1)}>Down</button>
-//           <button onClick={() => setCount(count + 1)}>Up</button>
-//       </div>
-//   );
-// }
-
-// function ViewCount () {
-//   const count = useRecoilValue(countAtom);
-
-//   return (
-//       <div>
-//           Current count is {count}!
-//       </div>
-//   );
-// }
-
-// export default () => (
-//   <div>
-//     <RecoilRoot>
-//       <UpDown />
-//       <ViewCount />
-//     </RecoilRoot>
-//   </div>
-// );
-
-import React from 'react';
+import { Feed } from 'components';
+import { fetchMapList } from 'libs/aspida';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import { userInfoState } from 'types/state';
+import { MapListItem } from 'types';
+import { paginationOperaton, userInfoState } from 'types/state';
 import { Header } from '../../components/organisms/Header';
 
 export default () => {
   const userInfo = useRecoilValue(userInfoState);
+
+  const router = useRouter();
+  const [totalMapCount, setTotalMapCount] = useState<number>(0);
+  const [mapList, setMapList] = useState<MapListItem[]>([]);
+  const pagination = useRecoilValue(paginationOperaton);
+  const { pageQuery } = router.query;
+
+  const fetch = async (page: number) => {
+    const query = {
+      page: page,
+      userId: userInfo?.id
+    };
+
+    const ret = await fetchMapList(query);
+
+    setTotalMapCount(ret.total);
+    setMapList(ret.result);
+  };
+
+  useEffect(() => {
+    const p = parseInt(pageQuery as string, 10) || pagination.page;
+    fetch(p);
+  }, [pagination.page]);
 
   const userCard = (
     <>
@@ -73,7 +55,8 @@ export default () => {
   return (
     <>
       <Header />
-      <div className='h-96'>{userInfo && userCard}</div>
+      <div className='mb-5'>{userInfo && userCard}</div>
+      <Feed totalCount={totalMapCount} items={mapList} />
     </>
   );
 };

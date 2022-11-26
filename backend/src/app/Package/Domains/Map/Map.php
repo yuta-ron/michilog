@@ -11,6 +11,7 @@ final class Map
     public readonly int $id;
     public readonly string $name;
     public readonly MapMeta $meta;
+    public readonly User $owner;
 
     /**
      * @var array<Layer>
@@ -23,6 +24,7 @@ final class Map
 
     public function __construct(?\App\Models\Map $obj, array $layers, array $locations) {
         $this->id = $obj->id;
+        $this->owner = new User($obj->owner()->first());
         $this->name = $obj->name;
         $meta = $obj->mapMeta()->first();
         $this->meta = new MapMeta($meta);
@@ -34,6 +36,6 @@ final class Map
      * @return User|null
      */
     public function getOwner(): ?User {
-        return $this->user;
+        return $this->owner;
     }
 }

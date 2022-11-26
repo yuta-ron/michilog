@@ -33,6 +33,7 @@ class MapApiAdapter
 
         return [
             'id' => $map->id,
+            'owner_id' => $map->getOwner()->id,
             'name' => $map->name,
             'description' => $map->meta->description,
             'thumbnail' => $map->meta->thumbnailUrl,

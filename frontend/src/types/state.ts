@@ -21,10 +21,18 @@ export const selectingStreetViewLatLng = atom<{ lat: number; lng: number }>({
   default: { lat: 35.6769883, lng: 139.7588499 }
 });
 
+export const paginationOperaton = atom<{
+  page: number;
+}>({
+  key: 'paginationOperaton',
+  default: { page: 1 }
+});
+
 export const mapState = atom<MappyMap>({
   key: 'mapState',
   default: {
     id: 0,
+    owner_id: null,
     name: '',
     description: '',
     layers: [],

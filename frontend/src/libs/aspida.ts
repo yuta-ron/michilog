@@ -45,8 +45,11 @@ axios.interceptors.response.use(
 
 const client = api(aspida(axios, config));
 
-export const fetchMapList = async (page: number) => {
-  return await client.v1.maps.$get({ query: { page: page } });
+export const fetchMapList = async (query: {
+  page: number;
+  userId?: number;
+}) => {
+  return await client.v1.maps.$get({ query: query });
 };
 
 export const fetchMap = async (mapId: number) => {
@@ -76,6 +79,10 @@ export const createMap = async (mapInfo: MapInfo) => {
 
 export const updateMap = async (map: MappyMap) => {
   return await client.v1.maps._mapId(map.id).$put({ body: map });
+};
+
+export const deleteMap = async (mapId: number) => {
+  return await client.v1.maps._mapId(mapId).$delete();
 };
 
 export const createLocation = async (locationInfo: LocationInfo) => {

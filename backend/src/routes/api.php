@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('api/v1')->middleware('auth')->group(function() {
     Route::get('/user', function (Request $request) {
         $user = [
+            'id' => $request->user()->id,
             'name' => $request->user()->name,
             'icon_url' => $request->user()->icon_url,
             'meta' => [
@@ -31,11 +32,14 @@ Route::prefix('api/v1')->middleware('auth')->group(function() {
         ];
         return response()->json($user);
     });
-    Route::get('maps',MapController::class. '@list');
     Route::post('maps',MapController::class. '@create');
-    Route::get('maps/{id}',MapController::class. '@index');
     Route::put('maps/{id}',MapController::class. '@update');
-    Route::delete('maps', MapController::class. '@destroy');
+    Route::delete('maps/{id}', MapController::class. '@destroy');
     Route::post('locations', LocationController::class. '@create');
-
 });
+
+Route::prefix('api/v1')->group(function() {
+    Route::get('maps',MapController::class. '@list');
+    Route::get('maps/{id}',MapController::class. '@index');
+});
+

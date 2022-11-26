@@ -23,6 +23,7 @@ export const updateLayerName = (
 
   const newMap: MappyMap = {
     id: baseMap.id,
+    owner_id: baseMap.owner_id,
     name: baseMap.name,
     description: baseMap.description,
     layers: newLayers,
@@ -40,6 +41,7 @@ export const swapLayer = (baseMap: MappyMap, from: number, to: number) => {
 
   const newMap: MappyMap = {
     id: baseMap.id,
+    owner_id: baseMap.owner_id,
     name: baseMap.name,
     description: baseMap.description,
     layers: newLayers,

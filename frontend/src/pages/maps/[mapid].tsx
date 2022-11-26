@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { MappyMap } from '../../components';
+import { EditPanels, MappyMap } from '../../components';
 import { Header } from '../../components/organisms/Header';
 import { mapState } from 'types/state';
 import { useRecoilState } from 'recoil';
@@ -61,6 +61,7 @@ export default () => {
     <>
       <Header />
       <div className='h-screen' style={style}>
+        <EditPanels />
         <MappyMap
           mapData={recoilMapState}
           containerStyle={{}}

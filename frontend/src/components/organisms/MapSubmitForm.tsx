@@ -1,3 +1,4 @@
+import { Button } from 'components/atoms/Button';
 import { createMap } from 'libs/aspida';
 import React, { useState } from 'react';
 import { MapInfo } from 'types';
@@ -52,13 +53,13 @@ export const MapSubmitForm = () => {
             }}
           />
         </div>
-        <button
+        <Button
           type='submit'
-          disabled={cliecked}
+          disabled={mapName.length <= 0 || cliecked}
+          isLoading={cliecked && !created}
           className={
-            created
-              ? butonStyleBase + 'bg-red-600 hover:bg-orange-700'
-              : butonStyleBase + 'bg-green-600 hover:bg-green-700'
+            butonStyleBase +
+            'disabled:opacity-50  bg-green-600 hover:bg-green-700'
           }
           onClick={async () => {
             setClicked(true);
@@ -74,9 +75,8 @@ export const MapSubmitForm = () => {
               window.location.href = '/maps/' + res.id + '/edit';
             }, 1000);
           }}
-        >
-          {created ? '作成しました！' : '作成'}
-        </button>
+          text={created ? '作成しました！' : '作成'}
+        ></Button>
       </div>
     </div>
   );

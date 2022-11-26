@@ -1,11 +1,12 @@
 import React, { useLayoutEffect } from 'react';
 import Image from 'next/image';
 import { Button } from 'components/atoms/Button';
-import { TwitterLogin, TwitterLogout } from 'libs/auth';
+import { TwitterLogout } from 'libs/auth';
 import { useRecoilValue } from 'recoil';
 import { userInfoState } from 'types/state';
 /* eslint-disable import/no-absolute-path */
 import logoImg from '/public/assets/logo.png';
+import { LoginButton } from 'components/molecules/LoginButton';
 
 export const Header = () => {
   const userInfo = useRecoilValue(userInfoState);
@@ -48,8 +49,7 @@ export const Header = () => {
           </button>
         ) : (
           <div className='rounded text-sm  px-5 py-3 border-2 border-style-500'>
-            {/* ログインしていなかったら */}
-            <Button className='' onClick={TwitterLogin} text='ログイン' />
+            <LoginButton />
           </div>
         )}
       </div>
@@ -92,8 +92,7 @@ export const Header = () => {
             </div>
           ) : (
             <div className='rounded px-5 py-3 md:border-2 border-style-500'>
-              {/* ログインしていなかったら */}
-              <Button className='' onClick={TwitterLogin} text='ログイン' />
+              <LoginButton className='' />
             </div>
           )}
         </div>

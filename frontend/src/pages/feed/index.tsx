@@ -6,29 +6,37 @@ import { Feed } from '../../components';
 import { fetchMapList } from 'libs/aspida';
 import { useRouter } from 'next/router';
 import { MapListItem } from 'types';
+import { paginationOperaton } from 'types/state';
+import { useRecoilValue } from 'recoil';
 
 export default () => {
   const router = useRouter();
+  const [totalMapCount, setTotalMapCount] = useState<number>(0);
   const [mapList, setMapList] = useState<MapListItem[]>([]);
+  const pagination = useRecoilValue(paginationOperaton);
   const { pageQuery } = router.query;
 
-  useEffect(() => {
-    const fetch = async () => {
-      const page = Number(pageQuery);
-      if (page) {
-        setMapList(await fetchMapList(page));
-      } else {
-        setMapList(await fetchMapList(1));
-      }
+  const fetch = async (page: number) => {
+    const query = {
+      page: page,
+      limit: 20
     };
 
-    fetch();
-  }, [pageQuery]);
+    const ret = await fetchMapList(query);
+
+    setTotalMapCount(ret.total);
+    setMapList(ret.result);
+  };
+
+  useEffect(() => {
+    const p = parseInt(pageQuery as string, 10) || pagination.page;
+    fetch(p);
+  }, [pagination.page]);
 
   return (
     <>
       <Header />
-      <Feed items={mapList} />
+      <Feed totalCount={totalMapCount} items={mapList} />
     </>
   );
 };

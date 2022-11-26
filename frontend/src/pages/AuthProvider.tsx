@@ -1,5 +1,5 @@
 import React, { ReactNode, useLayoutEffect } from 'react';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { getUser } from '../libs/api';
 import { buildUserInfoFromJson } from '../libs/util';
 import { userInfoState } from '../types/state';
@@ -9,10 +9,12 @@ type Props = {
 };
 
 export default function AuthProvider ({ children, ...props }: Props) {
-  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+  const setUserInfo = useSetRecoilState(userInfoState);
+  // const router = useRouter();
 
   useLayoutEffect(() => {
-    if (userInfo) return;
+    // console.log(router.pathname);
+    // if (userInfo) return;
 
     getUser()
       .then((result) => {

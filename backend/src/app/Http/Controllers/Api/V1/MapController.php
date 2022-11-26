@@ -9,6 +9,7 @@ use App\Models\MapMeta;
 use App\Models\Route;
 use App\Package\Domains\Layer\LayerRepositoryInterface;
 use App\Package\Domains\Map\MapApiAdapter;
+use App\Package\Domains\Map\MapListRequest;
 use App\Package\Domains\Map\MapRepositoryInterface;
 use App\Package\Domains\Map\MapsApiAdapter;
 use App\Package\Domains\Route\RouteRepositoryInterface;
@@ -25,8 +26,6 @@ class MapController extends Controller
     protected MapRepositoryInterface $mapRepository;
     protected LayerRepositoryInterface $layerRepository;
 
-    const TEST_USER_ID = 1;
-
     public function __construct(
         MapRepositoryInterface $mapRepository,
         LayerRepositoryInterface $layerRepository
@@ -36,10 +35,11 @@ class MapController extends Controller
     }
 
     public function list(Request $request) {
-        $page = $request->query('page') ?? 1;
-        $maps = $this->mapRepository->list($page, 20);
+        $request = new MapListRequest($request->query('page'), $request->query('limit'), $request->query('user_id'));
+        $maps = $this->mapRepository->list($request);
+        $total = $this->mapRepository->count($request); // limitつけなかった場合の全件
 
-        $response = MapsApiAdapter::toApiResponse($maps);
+        $response = MapsApiAdapter::toApiResponse($maps, $total);
         return response($response, 200);
     }
 
@@ -63,10 +63,13 @@ class MapController extends Controller
      */
     public function create(Request $request)
     {
-        // Serviceに切り出す
-        // Map 作成
+        $user = Auth::user();
+        if (!$user) {
+            return response('user not found', Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
         $map = Map::create([
-            'user_id' => self::TEST_USER_ID,
+            'user_id' => $user->id,
             'name' => $request->get('name'),
         ]);
 
@@ -75,11 +78,6 @@ class MapController extends Controller
         ]);
 
         return response($map, Response::HTTP_CREATED);
-    }
-
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -143,6 +141,7 @@ class MapController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Map::destroy([$id]);
+        return \response('ok', 200);
     }
 }

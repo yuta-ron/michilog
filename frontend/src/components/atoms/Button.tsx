@@ -1,37 +1,31 @@
 import * as React from 'react';
+import { ButtonBaseProps } from 'types/elm';
 
-type BaseProps = React.DetailedHTMLProps<
-  React.ButtonHTMLAttributes<HTMLButtonElement>,
-  HTMLButtonElement
->;
-
-type ButtonProps = {
+export type ButtonProps = {
   text: string;
   isLoading?: boolean;
-} & BaseProps;
+} & ButtonBaseProps;
 
-export class Button extends React.Component<ButtonProps> {
-  render () {
-    return (
-      <button
-        {...this.props}
-        onClick={this.props.onClick}
-        className={
-          this.props.className ??
-          'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
-        }
-      >
-        {this.props.isLoading && (
-          <div className='pr-2 inline-block'>
-            <div
-              className='rounded-full animate-spin h-6 w-6 border-2 border-gray-500 '
-              style={{ borderTopColor: 'transparent' }}
-            ></div>
-          </div>
-        )}
+export const Button = (props: ButtonProps) => {
+  return (
+    <button
+      {...props}
+      onClick={props.onClick}
+      className={
+        props.className ??
+        'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+      }
+    >
+      {props.isLoading && (
+        <div className='pr-2 inline-block'>
+          <div
+            className='rounded-full animate-spin h-4 w-4 border-2 border-gray-500 '
+            style={{ borderTopColor: 'transparent' }}
+          ></div>
+        </div>
+      )}
 
-        {this.props.text}
-      </button>
-    );
-  }
-}
+      {props.text}
+    </button>
+  );
+};

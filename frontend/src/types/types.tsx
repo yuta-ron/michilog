@@ -37,6 +37,7 @@ export type LocationInfo = {
 
 export type MappyMap = {
   id: number;
+  owner_id: number | null;
   name: string;
   description: string;
   layers: Array<Layer>;
@@ -46,6 +47,7 @@ export type MappyMap = {
 export type MappyMapType = MappyMap;
 
 export type UserInfo = {
+  id: number;
   name: string;
   icon_url: string;
   meta: {

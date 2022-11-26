@@ -8,8 +8,9 @@ class MapsApiAdapter
      * @param array<Map> $maps
      * @return array
      */
-    public static function toApiResponse(array $maps): array {
+    public static function toApiResponse(array $maps, int $total): array {
         $result = [];
+
         foreach($maps as $map) {
             $result[] = [
                 'id' => $map->id,
@@ -19,6 +20,6 @@ class MapsApiAdapter
             ];
         }
 
-        return $result;
+        return ['total' => $total, 'result' => $result,];
     }
 }

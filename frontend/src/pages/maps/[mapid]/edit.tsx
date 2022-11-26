@@ -1,7 +1,13 @@
 /* eslint "react/display-name": "off" */
 
 import React, { useEffect, useState } from 'react';
-import { MappyMap, DropArea, LayerEditor, Button } from '../../../components';
+import {
+  MappyMap,
+  DropArea,
+  LayerEditor,
+  Button,
+  MapDeleteButton
+} from '../../../components';
 import { Header } from '../../../components/organisms/Header';
 import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
@@ -120,6 +126,7 @@ export default () => {
             <div className='text-right pb-2'>
               <Button
                 text='保存'
+                className='rounded mr-2 px-3 py-1 text-white bg-blue-500'
                 disabled={isUpdating}
                 isLoading={isUpdating}
                 onClick={async () => {
@@ -128,12 +135,21 @@ export default () => {
                   }
                 }}
               />
+              <MapDeleteButton className='rounded mr-2 px-3 py-1 text-white bg-red-500' />
             </div>
           </div>
           <div className='flex-row'>
             <MappyMap mapData={recoilMapState} viewMode={false} />
           </div>
           <div className='flex-row'>
+            <a
+              href='https://github.com/yuta-ron/michilog/wiki/KML%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89%E6%96%B9%E6%B3%95'
+              className='pr-3 text-sm underline'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              KMLファイルのダウンロード方法
+            </a>
             <DropArea />
           </div>
         </div>

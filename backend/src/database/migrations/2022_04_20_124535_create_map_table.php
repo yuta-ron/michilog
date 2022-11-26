@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->timestamps();
         });
 
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('thumbnail_url')->nullable();
             $table->string('description')->nullable();
             $table->unsignedBigInteger('map_id');
-            $table->foreign('map_id')->references('id')->on('maps');
+            $table->foreign('map_id')->references('id')->on('maps')->cascadeOnDelete();
             $table->timestamps();
         });
 
@@ -36,7 +36,7 @@ return new class extends Migration
             $table->string('color');
             $table->string('hash');
             $table->unsignedBigInteger('map_id');
-            $table->foreign('map_id')->references('id')->on('maps');
+            $table->foreign('map_id')->references('id')->on('maps')->cascadeOnDelete();
             $table->timestamps();
         });
         Schema::create('routes', function (Blueprint $table) {
@@ -53,14 +53,14 @@ return new class extends Migration
             $table->double('lat');
             $table->double('lng');
             $table->unsignedBigInteger('map_id');
-            $table->foreign('map_id')->references('id')->on('maps');
+            $table->foreign('map_id')->references('id')->on('maps')->cascadeOnDelete();
             $table->timestamps();
         });
         Schema::create('location_metas', function (Blueprint $table) {
             $table->id();
             $table->string('media_url')->nullable();
             $table->unsignedBigInteger('location_id');
-            $table->foreign('location_id')->references('id')->on('locations');
+            $table->foreign('location_id')->references('id')->on('locations')->cascadeOnDelete();
             $table->timestamps();
         });
     }

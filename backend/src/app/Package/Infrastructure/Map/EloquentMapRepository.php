@@ -5,6 +5,7 @@ namespace App\Package\Infrastructure\Map;
 use App\Package\Domains\Layer\LayerRepositoryInterface;
 use App\Package\Domains\Location\LocationRepositoryInterface;
 use App\Package\Domains\Map\Map;
+use App\Package\Domains\Map\MapListRequest;
 use App\Package\Domains\Map\MapRepositoryInterface;
 use App\Package\Domains\Route\Route;
 use App\Package\Domains\Route\RouteRepositoryInterface;
@@ -26,15 +27,27 @@ class EloquentMapRepository implements MapRepositoryInterface
      * マップ一覧を出す
      * @return array<Map>
      */
-    public function list($page, $limit): array
+    public function list(MapListRequest $request): array
     {
-        $models = \App\Models\Map::offset(($page - 1) * $limit)->limit($limit)->get();
+        if ($request->userId) {
+            $models = \App\Models\Map::offset(($request->page - 1) * $request->limit)->limit($request->limit)->where('user_id',' = ', $request->userId)->get();
+        } else {
+            $models = \App\Models\Map::offset(($request->page - 1) * $request->limit)->limit($request->limit)->get();
+        }
         $results = [];
         foreach($models as $model) {
             $results[] = $this->initialize($model);
         }
 
         return $results;
+    }
+
+    public function count(MapListRequest $request): int {
+        if ($request->userId) {
+            return \App\Models\Map::where('user_id',' = ', $request->userId)->count();
+        }
+
+        return \App\Models\Map::count();
     }
 
     /**

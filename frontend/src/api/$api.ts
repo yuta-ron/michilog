@@ -46,9 +46,9 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
           fetch(prefix, PATH1, POST, option).send(),
         $post: (option: { body: Methods1['post']['reqBody'], config?: T | undefined }) =>
           fetch(prefix, PATH1, POST, option).send().then(r => r.body),
-        get: (option?: { query?: Methods1['get']['query'] | undefined, config?: T | undefined } | undefined) =>
+        get: (option: { query: Methods1['get']['query'], config?: T | undefined }) =>
           fetch<Methods1['get']['resBody']>(prefix, PATH1, GET, option).json(),
-        $get: (option?: { query?: Methods1['get']['query'] | undefined, config?: T | undefined } | undefined) =>
+        $get: (option: { query: Methods1['get']['query'], config?: T | undefined }) =>
           fetch<Methods1['get']['resBody']>(prefix, PATH1, GET, option).json().then(r => r.body),
         $path: (option?: { method?: 'get' | undefined; query: Methods1['get']['query'] } | undefined) =>
           `${prefix}${PATH1}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`

@@ -11,7 +11,7 @@ const index = () => {
             <h2 className='text-center text-xl font-bold'>
               動き方は千差万別、作って距離ガバ自慢しよう。
             </h2>
-            <video autoPlay loop muted className='mx-auto'>
+            <video autoPlay loop muted playsInline className='mx-auto'>
               <source
                 src='https://user-images.githubusercontent.com/18624396/201697363-968dace9-21c6-41e0-bae5-5f8bf833f809.mp4'
                 type='video/mp4'
@@ -26,10 +26,12 @@ const index = () => {
               }}
             />
           </div>
-          <h2 className='text-center text-xl font-bold'>
-            スクショを貼るのはもう卒業
-          </h2>
-          <OldExample />
+          <div style={{ margin: '56px' }}>
+            <h2 className='text-center text-xl font-bold'>
+              スクショを貼るのはもう卒業
+            </h2>
+            <OldExample />
+          </div>
         </div>
       </div>
     </>

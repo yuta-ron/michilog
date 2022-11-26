@@ -6,8 +6,13 @@ export type Methods = {
   };
   get: {
     query: {
-      page: number;
+      page?: number;
+      limit?: number;
+      userId?: number;
     };
-    resBody: MapListItem[];
+    resBody: {
+      total: number;
+      result: MapListItem[];
+    };
   };
 };
